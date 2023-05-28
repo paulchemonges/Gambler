@@ -1,10 +1,47 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title> Gambler</title>
+  <title>Gambler</title>
   <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 20px;
+    }
+
+    h1 {
+      text-align: center;
+    }
+
     pre {
       font-family: monospace;
+      background-color: #f4f4f4;
+      padding: 10px;
+      border-radius: 5px;
+      white-space: pre-wrap;
+    }
+
+    .match {
+      margin-bottom: 10px;
+    }
+
+    .team {
+      font-weight: bold;
+    }
+
+    .outcome {
+      margin-left: 10px;
+    }
+
+    .win {
+      color: green;
+    }
+
+    .lose {
+      color: red;
+    }
+
+    .draw {
+      color: orange;
     }
   </style>
 </head>
@@ -13,7 +50,6 @@
   <pre id="output"></pre>
 
   <script>
-    // Your Python script (main.py) converted to JavaScript
     var matches = [
       ["ACF Fiorentina", "AS Roma"],
       ["Sevilla FC", "Real Madrid"],
@@ -58,16 +94,16 @@
           var outcomeText = '';
 
           if (result === 'win') {
-            outcomeText = `${team1} vs. ${team2}: ${team1} wins`;
+            outcomeText = `<span class="team">${team1}</span> vs. <span class="team">${team2}</span>: <span class="outcome win">${team1} wins</span>`;
           } else if (result === 'lose') {
-            outcomeText = `${team1} vs. ${team2}: ${team2} wins`;
+            outcomeText = `<span class="team">${team1}</span> vs. <span class="team">${team2}</span>: <span class="outcome lose">${team2} wins</span>`;
           } else {
-            outcomeText = `${team1} vs. ${team2}: Draw`;
+            outcomeText = `<span class="team">${team1}</span> vs. <span class="team">${team2}</span>: <span class="outcome draw">Draw</span>`;
           }
 
-          outputElement.textContent += outcomeText + '\n';
+          outputElement.innerHTML += `<div class="match">${outcomeText}</div>`;
         }
-        outputElement.textContent += '\n';
+        outputElement.innerHTML += '<br>';
       }
     }
 
