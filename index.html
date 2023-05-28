@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Match Outcomes</title>
+  <style>
+    pre {
+      font-family: monospace;
+    }
+  </style>
+</head>
+<body>
+  <h1>Match Outcomes</h1>
+  <pre id="output"></pre>
+
+  <script>
+    // Your Python script (main.py) converted to JavaScript
+    var matches = [
+      ["ACF Fiorentina", "AS Roma"],
+      ["Sevilla FC", "Real Madrid"],
+      // Add more matches here
+    ];
+
+    var outcomes = ['win', 'draw', 'lose'];
+
+    function generateOutcomes() {
+      var allOutcomes = [];
+      for (var outcome of combinations(outcomes, matches.length)) {
+        allOutcomes.push(outcome);
+      }
+      return allOutcomes;
+    }
+
+    function* combinations(items, n) {
+      if (n === 0) {
+        yield [];
+      } else {
+        for (var i = 0; i < items.length; i++) {
+          for (var combination of combinations(items, n - 1)) {
+            yield [items[i], ...combination];
+          }
+        }
+      }
+    }
+
+    var outputElement = document.getElementById('output');
+
+    function displayOutcomes() {
+      outputElement.textContent = ''; // Clear previous output
+
+      var allOutcomes = generateOutcomes();
+
+      for (var outcome of allOutcomes) {
+        for (var i = 0; i < matches.length; i++) {
+          var match = matches[i];
+          var result = outcome[i];
+          var team1 = match[0];
+          var team2 = match[1];
+          var outcomeText = '';
+
+          if (result === 'win') {
+            outcomeText = `${team1} vs. ${team2}: ${team1} wins`;
+          } else if (result === 'lose') {
+            outcomeText = `${team1} vs. ${team2}: ${team2} wins`;
+          } else {
+            outcomeText = `${team1} vs. ${team2}: Draw`;
+          }
+
+          outputElement.textContent += outcomeText + '\n';
+        }
+        outputElement.textContent += '\n';
+      }
+    }
+
+    displayOutcomes();
+  </script>
+</body>
+</html>
